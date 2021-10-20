@@ -3,7 +3,8 @@
 PEACOCK 브랜드 제품을 카테고리별로 소개하고 판매하고 주문하는 웹사이트
 - 기간: 2021. 10. 04. ~ 2021. 10. 15.
 - [Backend GitHub](https://github.com/wecode-bootcamp-korea/25-1st-MECOOK-backend)
-- 초기 세팅부터 직접 구현하였으며, 프론트와 백을 연결해 모든 데이터는 통신으로 받아왔습니다.
+- [프로젝트 시연 영상](https://www.youtube.com/watch?v=p1O8gjB2X7I)
+- 초기 세팅부터 직접 구현하였으며, 모든 데이터는 프론트와 백의 통신으로 받아왔습니다.
 
 ## Members
 - **Frontend**: 김용현, 정민지, 손호영, 서고운
@@ -13,7 +14,7 @@ PEACOCK 브랜드 제품을 카테고리별로 소개하고 판매하고 주문�
 ## Technology
 - **Frontend**: `JSX` `React(CRA)` `Sass` (Library: `React-router-DOM`)
 - **Backend**: `Python`, `Django Web Framework`, `AWS`, `MySQL`
-- **Common**: 버전관리 `Git & GitHub`, 일정관리 `Trello`, 소통 `Slack`
+- **Common**: 버전관리 `Git & GitHub`, 소통 `Slack`,  일정관리 [Trello](https://trello.com/b/mb9yJISu/mecook)
 
 ## Main Function
 - **메인**: 회원가입, 로그인/로그아웃
