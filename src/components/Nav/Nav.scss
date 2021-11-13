@@ -12,7 +12,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 30px;
-  background-color: $theme-color;
+  background-color: white;
   font-family: mecook;
   font-weight: 700;
   top: 0;
@@ -25,7 +25,7 @@
     align-items: center;
   }
 
-  @media only screen and (min-width: 850px) {
+  @media only screen and (min-width: 1200px) {
     .threeLine {
       display: none;
     }
@@ -37,16 +37,16 @@
       letter-spacing: 3px;
       text-decoration: none;
       display: inline-block;
-      color: white;
+      color: black;
 
       &:hover {
-        color: white;
+        color: black;
       }
 
       &::after {
         display: block;
         content: '';
-        border-bottom: solid 2px white;
+        border-bottom: solid 2px black;
         padding-bottom: 5px;
         transform: scaleX(0);
         transition: transform 250ms ease-in-out;
@@ -62,19 +62,19 @@
 
       a {
         text-decoration: none;
-        color: white;
+        color: black;
       }
     }
   }
 
-  @media only screen and (max-width: 849px) {
+  @media only screen and (max-width: 1199px) {
     .threeLine {
-      color: white;
+      color: black;
       font-size: 25px;
 
       i {
         padding-right: 10px;
-        color: white;
+        color: black;
       }
     }
 
@@ -90,10 +90,10 @@
     button {
       font-family: mecook;
       padding: 10px 25px;
-      border-color: white;
+      border-color: black;
       border-radius: 20px;
       border-style: solid;
-      color: white;
+      color: black;
       font-size: 15px;
       font-weight: 800;
       background-color: transparent;
@@ -104,7 +104,7 @@
       margin: 0 30px 0 20px;
       font-size: 28px;
       text-decoration: none;
-      color: white;
+      color: black;
     }
   }
 }
@@ -113,7 +113,7 @@
   background-color: white;
   opacity: 0.7;
 
-  @media only screen and (min-width: 850px) {
+  @media only screen and (min-width: 1200px) {
     .menuBtn {
       color: black;
 
@@ -133,7 +133,7 @@
     }
   }
 
-  @media only screen and (max-width: 849px) {
+  @media only screen and (max-width: 1199px) {
     .threeLine {
       font-size: 20px;
       color: black;

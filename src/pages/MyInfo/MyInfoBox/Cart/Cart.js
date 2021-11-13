@@ -17,11 +17,13 @@ class Cart extends React.Component {
       fetch('http://10.58.2.208:8000/cart', {
         method: 'GET',
         headers: {
-          Authorization: TOKEN,
+          Authorization:
+            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTB9.dGGBB6a5tL-ZKovnfH-OV1W7tvgMhozGluag6Pqt6ww',
         },
       })
         .then(res => res.json())
         .then(data => {
+          console.log(data);
           this.setState({ cartList: data.cart_info });
         });
     }
@@ -29,36 +31,18 @@ class Cart extends React.Component {
 
   // 로그인한 유저의 장바구니 list GET
   componentDidMount() {
-    fetch('http://18.117.185.247:8000/cart', {
-      method: 'POST',
-      headers: {
-        Authorization:
-          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTB9.dGGBB6a5tL-ZKovnfH-OV1W7tvgMhozGluag6Pqt6ww',
-      },
-      body: JSON.stringify({
-        product: '2',
-        quantity: 1,
-      }),
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        this.setState({ cartList: data.cart_info });
-      });
-
-    // if (TOKEN) {
-    //   fetch('http://18.117.185.247:8000/cart', {
-    //     method: 'GET',
-    //     headers: {
-    //       Authorization: localStorage.getItem('token'),
-    //     },
-    //   })
-    //     .then(res => res.json())
-    //     .then(data => {
-    //       console.log(data);
-    //       this.setState({ cartList: data.cart_info });
-    //     });
-    // }
+    // fetch('http://10.58.2.208:8000/cart', {
+    //   method: 'POST',
+    //   headers: {
+    //     Authorization:
+    //       'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTB9.dGGBB6a5tL-ZKovnfH-OV1W7tvgMhozGluag6Pqt6ww',
+    //   },
+    //   body: JSON.stringify({
+    //     product: '8',
+    //     quantity: 1,
+    //   }),
+    // });
+    this.getCartList();
   }
 
   // 총 상품 가격 계산하는 함수
@@ -126,29 +110,39 @@ class Cart extends React.Component {
     fetch(`http://10.58.2.208:8000/cart/${itemId}`, {
       method: 'DELETE',
       headers: {
-        Authorization: TOKEN,
+        Authorization:
+          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTB9.dGGBB6a5tL-ZKovnfH-OV1W7tvgMhozGluag6Pqt6ww',
       },
     });
 
-    this.getCartList();
     this.getTotalPrice();
   };
 
   // 주문하기 버튼 클릭 시 포인트 차감
   orderProduct = () => {
     if (TOKEN) {
-      // const restPoint = this.props.point - this.state.totalPrice;
       alert(`${this.state.totalPrice}원 차감되어 주문이 완료되었습니다!`);
+      let query = '';
+      for (let i = 0; i < this.state.checkedItemList.length; i++) {
+        query += `item=${this.state.checkedItemList[i]}&`;
+      }
 
-      // 포인트 차감하고, 남은 포인트 서버에 보내는 API
-      fetch(`http://10.58.2.208:8000/order`, {
-        method: 'GET',
-        headers: {
-          Authorization: TOKEN,
-        },
-      })
+      console.log(query);
+      fetch(
+        `http://10.58.2.208:8000/order?${query.slice(0, query.length - 1)}`,
+        {
+          method: 'GET',
+          headers: {
+            Authorization:
+              'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTB9.dGGBB6a5tL-ZKovnfH-OV1W7tvgMhozGluag6Pqt6ww',
+          },
+        }
+      )
         .then(res => res.json())
-        .then(data => this.setState({ cartList: [] }));
+        .then(data => {
+          this.props.getPoint(data.remaining);
+          this.getCartList();
+        });
     } else {
       alert('로그인한 사용자만 이용할 수 있는 서비스입니다.');
     }
@@ -158,7 +152,7 @@ class Cart extends React.Component {
     return (
       <div className="cartContainer">
         <h1 className="cartTitle">Cart</h1>
-        {this.state.cartList.length > 0 ? (
+        {this.state.cartList && this.state.cartList.length > 0 ? (
           <ul className="cartList">
             {this.state.cartList
               ? this.state.cartList.map(cartItem => {
@@ -193,7 +187,8 @@ class Cart extends React.Component {
         <span className="checkAllLabel">전체선택</span>
         <div className="cartTotal">
           <p className="totalCount">
-            TOTAL<span>{this.state.cartList.length}</span>
+            TOTAL
+            <span>{this.state.cartList && this.state.cartList.length}</span>
           </p>
           <p className="totalPrice">
             <i className="fas fa-won-sign"></i>

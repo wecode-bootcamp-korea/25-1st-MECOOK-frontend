@@ -15,11 +15,11 @@ class MyInfoBox extends React.Component {
 
   componentDidMount() {
     if (TOKEN) {
-      fetch('http://18.117.185.247:8000/user/login', {
+      fetch('http://10.58.2.208:8000/user/login', {
         method: 'POST',
         body: JSON.stringify({
-          account: 'aaaaaa',
-          password: 'Aa123456!',
+          account: 'cheesepuff90',
+          password: 'Cheesepuff90@',
         }),
       })
         .then(res => res.json())
@@ -34,6 +34,11 @@ class MyInfoBox extends React.Component {
 
   handleShowBtnClick = () => {
     this.setState({ isBoxVisible: !this.state.isBoxVisible });
+  };
+
+  getPoint = point => {
+    console.log('point');
+    console.log(point);
   };
 
   render() {
@@ -56,6 +61,7 @@ class MyInfoBox extends React.Component {
           <Cart
             point={this.state.userInfo && this.state.userInfo[1]}
             cartList={this.state.cartList}
+            getPoint={this.getPoint}
           />
           <BtnMyInfo handleShowBtnClick={this.handleShowBtnClick} />
         </div>

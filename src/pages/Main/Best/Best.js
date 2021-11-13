@@ -12,7 +12,7 @@ class Best extends Component {
   }
 
   componentDidMount() {
-    fetch('http://18.117.185.247:8000/product/?limit=6&sort=priority', {
+    fetch('http://10.58.2.208:8000/product/?limit=6&sort=priority', {
       method: 'GET',
     })
       .then(res => res.json())
@@ -25,10 +25,6 @@ class Best extends Component {
   }
 
   render() {
-    localStorage.setItem(
-      'token',
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.LI4hn7Fi_mX8KdmCmVAcAhejLdtCgmV4LefCTdcqR24'
-    );
     const { menuList } = this.state;
     return (
       <section className="bestBox">

@@ -11,12 +11,11 @@ class BestProduct extends Component {
   }
 
   componentDidMount() {
-    fetch('http://18.117.185.247:8000/product/?limit=6&sort=priority', {
+    fetch('http://10.58.2.208:8000/product/?limit=6&sort=priority', {
       method: 'GET',
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         this.setState({
           menuList: data.result,
         });
@@ -32,8 +31,8 @@ class BestProduct extends Component {
             this.state.menuList.map(menu => {
               const {
                 productId,
-                mainImage,
-                subImage,
+                thumbImg,
+                thumbImgHover,
                 category,
                 name,
                 cookingTime,
@@ -44,8 +43,8 @@ class BestProduct extends Component {
                 <ProductPreview
                   key={productId}
                   productId={productId}
-                  mainImage={mainImage}
-                  subImage={subImage}
+                  thumbImg={thumbImg}
+                  thumbImgHover={thumbImgHover}
                   category={category}
                   name={name}
                   cookingTime={cookingTime}

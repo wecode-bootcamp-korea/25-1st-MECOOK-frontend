@@ -6,13 +6,15 @@
   margin: 0 auto;
   margin-bottom: 100px;
   margin-top: -150px;
-
   h1 {
-    max-width: 480px;
+    max-width: 310px;
+    margin-left: -70px;
+    margin-bottom: 50px;
     font-size: 56px;
+    line-height: 70px;
     color: #1f695b;
     word-wrap: break-word;
-    animation: fadeIn 4s;
+    animation: fadeIn 6s;
     @keyframes fadeIn {
       from {
         opacity: 0;
@@ -21,16 +23,29 @@
         opacity: 1;
       }
     }
-
     &:before {
       display: block;
       position: absolute;
-      width: 500px;
+      width: 800px;
       top: 30px;
-      right: 0;
+      right: 75px;
       margin-right: 975px;
       content: '';
       border: 1px solid black;
     }
   }
+}
+.imageTopInfo {
+  display: flex;
+  flex-direction: column;
+  padding-left: 100px;
+  width: 400px;
+  color: #ba9180;
+  margin-top: 200px;
+  font-size: 28px;
+}
+p {
+  margin: 10px;
+  line-height: 40px;
+  font-size: 18px;
 }

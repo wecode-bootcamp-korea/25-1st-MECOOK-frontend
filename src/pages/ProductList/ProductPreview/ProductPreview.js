@@ -26,15 +26,18 @@ class ProductPreview extends React.Component {
           : this.state.likeCount + 1,
       });
 
-      fetch('https://f960-211-106-114-186.ngrok.io/like/user', {
+      fetch('http://10.58.2.208:8000/like/user', {
         method: 'POST',
         headers: {
-          Authorization: localStorage.getItem('token'),
+          Authorization:
+            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTB9.dGGBB6a5tL-ZKovnfH-OV1W7tvgMhozGluag6Pqt6ww',
         },
         body: JSON.stringify({
           product: this.props.productId,
         }),
-      });
+      })
+        .then(res => res.json())
+        .then(data => console.log(data));
     } else {
       alert('로그인 해주십시오');
     }
@@ -69,7 +72,9 @@ class ProductPreview extends React.Component {
           className="productPreviewImage"
           src={this.state.imageSrc}
           alt="food"
-          onClick={() => goToDetail(productId)}
+          onClick={() =>
+            goToDetail(productId, this.state.isLiked, this.state.likeCount)
+          }
           onMouseOut={() => this.handleImageMouseOut(thumbImg)}
           onMouseOver={() => this.handleImageMouseOver(thumbImgHover)}
         />

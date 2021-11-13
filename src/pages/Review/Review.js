@@ -52,7 +52,7 @@ class Review extends Component {
       .then(res => res.json())
       .then(() => {
         fetch(
-          `http://10.58.2.208:8000/review/comment/1?limit=1&offset=${this.state.replList[0].review_id}`,
+          'http://10.58.2.208:8000/review/list?product=1&limit=1&offset=0',
           {
             method: 'GET',
           }
@@ -73,29 +73,29 @@ class Review extends Component {
     });
   };
 
-  addReplCnt = () => {
-    this.setState({
-      page: this.state.page + 1,
-    });
+  // addReplCnt = () => {
+  //   this.setState({
+  //     page: this.state.page + 1,
+  //   });
 
-    fetch(
-      `http://10.58.2.208:8000/review/comment/1?limit=3&offset=${
-        this.state.page * 3
-      }`,
-      {
-        method: 'GET',
-      }
-    )
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          replList: [...this.state.replList, ...data.review_by_product],
-        });
-      });
-  };
+  //   fetch(
+  //     `http://10.58.2.208:8000/review/comment/1?limit=3&offset=${
+  //       this.state.page * 3
+  //     }`,
+  //     {
+  //       method: 'GET',
+  //     }
+  //   )
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       this.setState({
+  //         replList: [...this.state.replList, ...data.review_by_product],
+  //       });
+  //     });
+  // };
 
   componentDidMount() {
-    fetch('http://10.58.2.208:8000/review/comment/1?limit=3&offset=0', {
+    fetch(`http://10.58.2.208:8000/review/list?product=1&limit=3&offset=0`, {
       method: 'GET',
     })
       .then(res => res.json())

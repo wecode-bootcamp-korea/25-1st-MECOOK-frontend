@@ -34,17 +34,35 @@ class Search extends Component {
   };
 
   handleSearch = () => {
-    fetch('https://f960-211-106-114-186.ngrok.io/{product}/search', {
-      method: 'POST',
-      body: JSON.stringify({
-        keyword: this.state.inputData.split(' '),
-      }),
-    })
+    const searchWords = this.state.inputData.split(' ');
+
+    let query = '';
+    for (let i = 0; i < searchWords.length; i++) {
+      query += `search=${searchWords[i]}&`;
+    }
+
+    fetch(
+      `http://10.58.2.208:8000/product/?${query.slice(0, query.length - 1)}`,
+      {
+        method: 'GET',
+      }
+    )
       .then(response => response.json())
-      .then(result => {
+      .then(result =>
+        this.setState({
+          searchResult: result,
+        })
+      )
+      .then(() => {
+        this.props.history.push({
+          pathname: '/search-result',
+          state: {
+            searchResult: this.state.searchResult,
+            keyword: this.state.inputData,
+          },
+        });
         this.setState({
           inputData: '',
-          searchResult: result,
         });
       });
   };

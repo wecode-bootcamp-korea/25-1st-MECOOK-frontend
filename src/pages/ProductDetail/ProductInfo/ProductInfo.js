@@ -5,9 +5,10 @@ class ProductInfo extends React.Component {
   render() {
     return (
       <div className="productInfoBox">
-        <h1>{this.props.productData && this.props.productData.text}</h1>
+        <h1>{this.props.dataDetail ? this.props.dataDetail[0].text : null}</h1>
         <Btn
           productId={this.props.productId}
+          cccccccc
           productResult={this.props.productResult}
         />
       </div>

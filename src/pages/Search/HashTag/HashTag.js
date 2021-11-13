@@ -6,11 +6,12 @@ class HashTag extends Component {
     super();
     this.state = {
       hashtagList: [],
-      filterdList: [],
+      searchResult: [],
     };
   }
+
   componentDidMount() {
-    fetch('https://f960-211-106-114-186.ngrok.io/product/?product=1&detail=1', {
+    fetch('http://10.58.2.208:8000/product/?product=1&detail=1', {
       method: 'GET',
     })
       .then(res => res.json())
@@ -22,17 +23,25 @@ class HashTag extends Component {
   }
 
   handleSearch = hashTag => {
-    fetch('https://f960-211-106-114-186.ngrok.io/product/search', {
-      method: 'POST',
-      body: JSON.stringify({
-        keyword: [hashTag],
-      }),
+    fetch(`http://10.58.2.208:8000/product/?search=${hashTag}`, {
+      method: 'GET',
     })
       .then(response => response.json())
       .then(result => {
         this.setState({
-          filteredList: result,
+          searchResult: result.result,
         });
+      })
+      .then(() => {
+        console.log('setstate: ' + this.state.searchResult);
+        this.state.searchResult &&
+          this.props.history.push({
+            pathname: '/search-result',
+            state: {
+              searchResult: this.state.searchResult,
+              keyword: hashTag,
+            },
+          });
       });
   };
 
@@ -49,7 +58,9 @@ class HashTag extends Component {
                   <Link
                     to="/search-result"
                     onClick={() => this.handleSearch(tag)}
-                  >{`#${tag}`}</Link>
+                  >
+                    #{tag}
+                  </Link>
                 </li>
               );
             })}

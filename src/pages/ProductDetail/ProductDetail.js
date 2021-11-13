@@ -6,6 +6,7 @@ import DetailImageLeft from './DetailImageLeft/DetailImageLeft';
 import DetailImageRight from './DetailImageRight/DetailImageRight';
 import DetailImageBottom from './DetailImageBottom/DetailImageBottom';
 import TagBottom from './TagBottom/TagBottom';
+import Review from '../Review/Review';
 import './ProductDetail.scss';
 
 class ProductDetail extends React.Component {
@@ -19,12 +20,9 @@ class ProductDetail extends React.Component {
   componentDidMount() {
     const productId = this.props.match.params.id;
 
-    fetch(
-      `https://f960-211-106-114-186.ngrok.io/product/?product=${productId}&detail=1`,
-      {
-        method: 'GET',
-      }
-    )
+    fetch(`http://10.58.2.208:8000/product/?product=${productId}&detail=1`, {
+      method: 'GET',
+    })
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -52,6 +50,10 @@ class ProductDetail extends React.Component {
               productId={
                 this.state.productData.result &&
                 this.state.productData.result[0].id
+              }
+              dataDetail={
+                this.state.productData.result &&
+                this.state.productData.result[0].detail
               }
             />
 
@@ -82,6 +84,12 @@ class ProductDetail extends React.Component {
             <TagBottom
               // productId={this.props.match.params.id}
               dataResult={this.state && this.state.productData}
+            />
+            <Review
+              productId={
+                this.state.productData.result &&
+                this.state.productData.result[0].id
+              }
             />
           </div>
         }

@@ -8,27 +8,14 @@ class SearchResult extends Component {
     this.state = {
       inputData: '',
       searchResult: [],
-      productList: [],
     };
   }
 
   componentDidMount() {
-    // fetch(
-    //   'https://f960-211-106-114-186.ngrok.io/product/menu/category/1/detail'
-    // )
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     this.setState({
-    //       productList: data.result,
-    //     });
-    //   });
-
-    fetch('data/bestMenuData.json')
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          productList: data.result,
-        });
+    this.props.location.state &&
+      this.setState({
+        searchResult: this.props.location.state.searchResult.result,
+        inputData: this.props.location.state.keyword,
       });
   }
 
@@ -40,38 +27,27 @@ class SearchResult extends Component {
     this.setState({ inputData: '' });
   };
 
-  // handleBtnSearch = () => {
-  //   fetch('https://f960-211-106-114-186.ngrok.io/{product}/search', {
-  //     method: 'POST',
-  //   })
-  //     .then(response => response.json())
-  //     .then(result => {
-  //       this.setState({
-  //         productList: result,
-  //       });
-  //     });
-  // };
-
   render() {
     return (
       <div className="result">
         <div className="resultHeader">
           <div className="resultHeaderBox">
             <p>
-              <em className="resultContent">샐러드</em>에 대해{' '}
+              <em className="resultContent">{this.state.inputData}</em>에 대해
               <em className="resultContent">
-                총 {this.state.productList.length}건
+                총 {this.state.searchResult && this.state.searchResult.length}건
               </em>
               의 검색결과가 있습니다.
             </p>
           </div>
         </div>
         <div className="resultList">
-          {this.state.productList &&
-            this.state.productList.map(list => {
+          {this.state.searchResult &&
+            this.state.searchResult.map(list => {
               const {
                 id,
-                mainImage,
+                thumbImg,
+                thumbImgHover,
                 category,
                 name,
                 cookingTime,
@@ -83,7 +59,8 @@ class SearchResult extends Component {
                 <ProductPreview
                   key={id}
                   productId={id}
-                  mainImage={mainImage}
+                  thumbImg={thumbImg}
+                  thumbImgHover={thumbImgHover}
                   category={category}
                   name={name}
                   cookingTime={cookingTime}

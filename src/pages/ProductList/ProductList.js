@@ -11,13 +11,10 @@ class ProductList extends React.Component {
   componentDidUpdate(prevProps) {
     const TOKEN = localStorage.getItem('token');
     if (this.props.listId !== prevProps.listId) {
-      fetch(
-        `https://f960-211-106-114-186.ngrok.io/product/?category=${this.props.listId}`,
-        {
-          method: 'GET',
-          ...(TOKEN && { headers: { Authorization: TOKEN } }),
-        }
-      )
+      fetch(`http://10.58.2.208:8000/product/?category=${this.props.listId}`, {
+        method: 'GET',
+        ...(TOKEN && { headers: { Authorization: TOKEN } }),
+      })
         .then(res => res.json())
         .then(data => {
           this.setState({ productList: data.result });

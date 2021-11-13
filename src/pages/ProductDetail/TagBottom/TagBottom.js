@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './TagBottom.scss';
-
 class TagBottom extends React.Component {
   constructor() {
     super();
@@ -9,22 +8,18 @@ class TagBottom extends React.Component {
       filteredList: [],
     };
   }
-
   handleClick = hashTag => {
-    fetch(
-      `https://f960-211-106-114-186.ngrok.io/product/?search="진한"&search="우보탕"`,
-      {
-        method: 'GET',
-      }
-    )
+    fetch(`http://10.58.2.208:8000/product/search=${hashTag}`, {
+      method: 'GET',
+    })
       .then(response => response.json())
       .then(result => {
         this.setState({
           filteredList: result,
         });
       });
+    console.log(hashTag);
   };
-
   render() {
     return (
       <div className="tagBottom">
@@ -37,11 +32,14 @@ class TagBottom extends React.Component {
               return (
                 <li className="li" key={i}>
                   <Link
-                    to="/search-result"
-                    onClick={() => {
-                      this.handleClick(tag);
+                    to={{
+                      pathname: '/search-result',
+                      state: { filteredList: this.state.filteredList },
                     }}
-                  >{`#${tag}`}</Link>
+                    onClick={() => this.handleClick(tag)}
+                  >
+                    {`#${tag}`}
+                  </Link>
                 </li>
               );
             })}
@@ -50,5 +48,4 @@ class TagBottom extends React.Component {
     );
   }
 }
-
 export default TagBottom;

@@ -94,16 +94,16 @@ class Nreview extends Component {
   };
 
   componentDidMount() {
-    fetch('http://10.58.2.208:8000/review/comment/1?limit=3&offset=0', {
-      method: 'GET',
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log('컴디마 data===>', data);
-        this.setState({
-          replList: data.review_by_product,
-        });
-      });
+    // fetch('http://10.58.2.208:8000/review/comment/1?limit=3&offset=0', {
+    //   method: 'GET',
+    // })
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     console.log('컴디마 data===>', data);
+    //     this.setState({
+    //       replList: data.review_by_product,
+    //     });
+    //   });
   }
 
   render() {

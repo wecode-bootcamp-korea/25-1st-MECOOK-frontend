@@ -5,7 +5,9 @@
     display: block;
     width: 350px;
     margin: 0 auto;
+    margin-top: 150px;
     animation: productImageFadeIn 0.3s;
+
     @keyframes productImageFadeIn {
       from {
         opacity: 0;
